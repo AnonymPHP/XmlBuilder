@@ -58,7 +58,7 @@ class XmlBuilder
 
         $domOutput->loadXML($xml->asXML());
 
-        dump($domOutput->saveXML());
+        return $domOutput->saveXML();
     }
 
     private function hasStringKeys(array $array)
