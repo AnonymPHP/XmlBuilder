@@ -2,7 +2,10 @@
 
 namespace Cable\Xml\Builder;
 
-
+/**
+ * Class XmlBuilder
+ * @package Cable\Xml\Builder
+ */
 class XmlBuilder
 {
     /**
