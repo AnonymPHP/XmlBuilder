@@ -1,0 +1,18 @@
+{
+    "name": "cable/xml-builder",
+    "description": "Cable framework xml builder",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "vahit",
+            "email": "vahit.serif119@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Cable\\Xml\\Builder\\": "src/"
+        }
+    }
+}
