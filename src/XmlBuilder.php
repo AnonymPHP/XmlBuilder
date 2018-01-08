@@ -45,7 +45,6 @@ class XmlBuilder
             $element->setAttribute($name, $attribute);
         }
 
-
         $dom->appendChild($element);
         $container = $dom->saveXML();
 
@@ -74,10 +73,22 @@ class XmlBuilder
             }
             if (is_array($value)) {
 
+                $attributes = [];
+
+                if (isset($value['@data'])) {
+                    $attributes = $value['@attributes'];
+                    $value = $value['@data'];
+                }
+
                 if (!$this->hasStringKeys($value)) {
                     $this->arrayToXml($value, $element, $key);
                 } else {
                     $subnode = $element->addChild($key);
+
+                    if (!empty($attributes)) {
+                        $this->setAttributes($subnode, $attributes);
+                    }
+
                     $this->arrayToXml($value, $subnode);
                 }
 
@@ -85,6 +96,27 @@ class XmlBuilder
                 $element->addChild("$key", htmlspecialchars("$value"));
             }
         }
+    }
+
+    /**
+     * @param \SimpleXMLElement $node
+     * @param array $attributes
+     */
+    public function setAttributes(\SimpleXMLElement $node, array $attributes)
+    {
+
+        if (isset($attributes['@namespace'])) {
+            $namespace = $attributes['@namespace'];
+            unset($attributes['@namespace']);
+        } else {
+            $namespace = '';
+        }
+
+
+
+        array_walk($attributes, function ($value, $key) use ($node, $namespace) {
+            $node->addAttribute($key, $value, $namespace);
+        });
     }
 
 
