@@ -109,7 +109,7 @@ class XmlBuilder
             $namespace = $attributes['@namespace'];
             unset($attributes['@namespace']);
         } else {
-            $namespace = '';
+            $namespace = null;
         }
 
 
